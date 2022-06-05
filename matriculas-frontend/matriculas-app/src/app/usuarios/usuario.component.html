@@ -1,0 +1,30 @@
+<div class="card border-primary mb-3">
+  <div class="card-body text-primary">
+    <h5 class="card-title">Usuarios</h5>
+
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Cedula</th>
+          <th>Nombre</th>
+          <th>Rol</th>
+          <th>Profesion</th>
+          <th>Empresa donde trabaja</th>
+          <th>Fecha Nacimiento</th>
+          <th>Nombre Usuario</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let usuario of usuarios">
+          <td>{{ usuario.cedula }}</td>
+          <td>{{ usuario.nombre }} </td>
+          <td>{{ usuario.rol }} </td>
+          <td>{{ usuario.profesion }}</td>
+          <td>{{ usuario.empresaTrabajo }}</td>
+          <td>{{ usuario.fechaNacimiento }}</td>
+          <td>{{ usuario.nombreUsuario }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
