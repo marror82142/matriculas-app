@@ -1,0 +1,39 @@
+<div class="card border-primary mb-3">
+    <div class="card-body text-primary">
+        <h5 class="card-title">Programas </h5>
+        <form (ngSubmit)="getProgramas()" class="center">
+            <div class="form-group row center">
+                <label for="nombre" class="col-form-label col-sm-2">Nombre</label>
+                <div class="col-sm-6 my-2">
+                    <input type="text" class="form-control" [(ngModel)]="programas.nombre" name="nombre" required="true">
+                </div>
+            </div>
+            <div class="form-group row center">
+                <div class="col-sm-12 center my-2">
+                    <button class="btn btn-primary " name="button">Guardar</button>
+                </div>
+            </div>
+        </form>
+        <br>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>ingenieria</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>tecnica alimentos</td>
+                </tr>
+            </tbody>
+        </table>
+
+
+    </div>
+</div>
