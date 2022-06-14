@@ -9,7 +9,7 @@ public interface IProgramaService {
 	
 	public Programa save(Programa programa);
 	
-	public Programa findById(Long codigo);
+	public Programa findById(Long id);
 	
-	public void delete(Long codigo);
+	public void delete(Long id);
 }

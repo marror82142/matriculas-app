@@ -29,14 +29,14 @@ public class ProgramaServiceImpl implements IProgramaService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public Programa findById(Long codigo) {
-		return programaDao.findById(codigo).orElse(null);
+	public Programa findById(Long id) {
+		return programaDao.findById(id).orElse(null);
 	}
 
 	@Override
 	@Transactional
-	public void delete(Long codigo) {
-		programaDao.deleteById(codigo);
+	public void delete(Long id) {
+		programaDao.deleteById(id);
 	}
 
 }
