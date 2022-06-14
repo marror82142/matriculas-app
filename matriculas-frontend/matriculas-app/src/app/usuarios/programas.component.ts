@@ -18,11 +18,13 @@ export class programasComponent implements OnInit {
   }
 
 public getProgramas(): void{
-  if(this.programas.nombre == null
+  if(this.programas.nombre == null || 
+    this.programas.codigo == null || 
+    this.programas.tipo == null
   ){
     alert("Los campos son requeridos");
   }else{
-    this.programasService.getProgramas(this.programas).subscribe(
+    this.programasService.create(this.programas).subscribe(
       response => this.router.navigate(['/programas'])
     )
   }
