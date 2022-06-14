@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
-
 import matriculas.models.entity.Usuario;
 import matriculas.models.services.IUsuarioService;
 
@@ -40,30 +39,6 @@ public class UsuarioRestController {
 	@GetMapping("/usuarios")
 	public List<Usuario> index(){
 		return usuarioService.findAll();
-	}
-	
-	@GetMapping("/usuarios/usuario")
-	public Usuario show(@RequestParam Long cedula, 
-							@RequestParam String nombre,
-							@RequestParam String rol,
-							@RequestParam String empresaTrabajo,
-							@RequestParam String profesion,
-							@RequestParam String fechaNacimiento,
-							@RequestParam String nombreUsuario,
-							@RequestParam String contrasena){
-		
-		Usuario usuario = new Usuario();
-		usuario.setCedula(cedula);
-		usuario.setNombre(nombre);
-		usuario.setRol(rol);
-		usuario.setProfesion(profesion);
-		usuario.setEmpresaTrabajo(empresaTrabajo);
-		usuario.setNombreUsuario(nombreUsuario);
-		usuario.setContrasena(contrasena);
-		LocalDate fecha = LocalDate.parse(fechaNacimiento.toString(), DateTimeFormatter.ISO_LOCAL_DATE);
-		usuario.setFechaNacimiento(fecha);
-
-		return create(usuario);
 	}
 	
 	@GetMapping("/usuarios/login")
@@ -82,7 +57,12 @@ public class UsuarioRestController {
 		}
 		return usr;
 	}
-
+	
+	@GetMapping("/usuarios/{cedula}")
+	public Usuario show(@PathVariable Long cedula){
+		return usuarioService.findById(cedula);
+	}
+	
 	
 	@PostMapping("/usuarios")
 	@ResponseStatus(HttpStatus.CREATED)

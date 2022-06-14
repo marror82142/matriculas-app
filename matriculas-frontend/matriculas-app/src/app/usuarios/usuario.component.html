@@ -23,6 +23,10 @@
           <td>{{ usuario.empresaTrabajo }}</td>
           <td>{{ usuario.fechaNacimiento }}</td>
           <td>{{ usuario.nombreUsuario }}</td>
+          <td>
+            <button type="button" name="edit" [routerLink]="['/usuarios/form', usuario.cedula]" class="btn btn-primary btn-sm"><span class="bi bi-pencil"></span></button>
+            <button type="button" name="delete" (click)='delete(usuario)' class="btn btn-danger btn-sm"><span class="bi bi-trash"></span></button>
+         </td>
         </tr>
       </tbody>
     </table>
