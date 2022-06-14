@@ -84,7 +84,7 @@ public class ProgramaRestController {
 	public Programa update(@RequestBody Programa programa, @PathVariable Long codigo){
 		Programa current = programaService.findById(codigo);
 		
-		current.setCodigo(programa.getPrograma());
+		current.setCodigo(programa.getCodigo());
 		current.setNombrePrograma(programa.getNombrePrograma());
 
 		return programaService.save(current);
