@@ -17,23 +17,41 @@ import javax.persistence.TemporalType;
 public class Programa implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
-	private Long codigo;
-	private String nombrePrograma;
+	private Long id;
+	private String codigo;
+	private String tipo;
+	private String nombre;
 	
-	public Long getCodigo() {
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(Long codigo) {
+	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
 
-	public String getNombrePrograma() {
-		return nombrePrograma;
+	public String getNombre() {
+		return nombre;
 	}
 
-	public void setNombrePrograma(String nombrePrograma) {
-		this.nombrePrograma = nombrePrograma;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
 }

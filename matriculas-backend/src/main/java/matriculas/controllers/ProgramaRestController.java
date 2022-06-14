@@ -43,35 +43,20 @@ public class ProgramaRestController {
 	}
 	
 	@GetMapping("/programas/programa")
-	public Programa show(@RequestParam Long codigo, 
-							@RequestParam String nombrePrograma
+	public Programa show(@RequestParam Long id,
+							@RequestParam String codigo, 
+							@RequestParam String tipo,
+							@RequestParam String nombre
 							){
 		
 		Programa programa = new Programa();
+		programa.setId(id);
 		programa.setCodigo(codigo);
-		programa.setNombrePrograma(nombrePrograma);
+		programa.setTipo(tipo);
+		programa.setNombre(nombre);
 
 		return create(programa);
 	}
-	
-	/*  Duda sobre "Login" para programa
-	@GetMapping("/usuarios/login")
-	public Usuario login(	@RequestParam String nombreUsuario,
-							@RequestParam String contrasena){	
-		Usuario usr = null;
-		List<Usuario> usuarios = usuarioService.findAll();
-		for (int i = 0; i < usuarios.size(); i++) {
-			if(usuarios.get(i).getNombreUsuario().equals(nombreUsuario)
-					&& usuarios.get(i).getContrasena().equals(contrasena)) {
-					usr = usuarios.get(i);
-				}
-		}
-		if(usr == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado");
-		}
-		return usr;
-	}
-	*/
 	
 	@PostMapping("/programas")
 	@ResponseStatus(HttpStatus.CREATED)
@@ -80,20 +65,22 @@ public class ProgramaRestController {
 	}
 	
 	//Actualizar programa
-	@PutMapping("/programas/{codigo}")
-	public Programa update(@RequestBody Programa programa, @PathVariable Long codigo){
-		Programa current = programaService.findById(codigo);
+	@PutMapping("/programas/{id}")
+	public Programa update(@RequestBody Programa programa, @PathVariable Long id){
+		Programa current = programaService.findById(id);
 		
+		current.setId(programa.getId());
 		current.setCodigo(programa.getCodigo());
-		current.setNombrePrograma(programa.getNombrePrograma());
+		current.setTipo(programa.getTipo());
+		current.setNombre(programa.getNombre());
 
 		return programaService.save(current);
 	}
 	
 	//Eliminar programa
-	@DeleteMapping("/programas/{codigo}")
+	@DeleteMapping("/programas/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void delete(@PathVariable Long codigo){
-		programaService.delete(codigo);
+	public void delete(@PathVariable Long id){
+		programaService.delete(id);
 	}
 }
