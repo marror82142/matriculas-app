@@ -91,7 +91,7 @@ public class ProgramaRestController {
 	}
 	
 	//Eliminar programa
-	@DeleteMapping("/usuarios/{codigo}")
+	@DeleteMapping("/programas/{codigo}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable Long codigo){
 		programaService.delete(codigo);
