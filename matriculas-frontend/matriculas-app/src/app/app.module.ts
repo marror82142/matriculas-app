@@ -5,11 +5,13 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { usuarioComponent } from './usuarios/usuario.component';
+import { programasComponent } from './usuarios/programas.component';
 import { usuarioService } from './usuarios/usuario.service';
+import { programasService } from './usuarios/programas.service';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormComponent } from './usuarios/form.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './usuarios/login.component';
 
 const routes: Routes = [
@@ -17,6 +19,8 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'usuarios', component: usuarioComponent},
   {path: 'usuarios/form', component: FormComponent},
+  {path: 'programas', component: programasComponent},
+  {path: 'usuarios/form/:cedula', component: FormComponent},
 ]
 
 @NgModule({
@@ -26,15 +30,17 @@ const routes: Routes = [
     FooterComponent,
     usuarioComponent,
     FormComponent,
-    LoginComponent
+    LoginComponent,
+    programasComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    FormsModule,
+    FormsModule,    
+    ReactiveFormsModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [usuarioService],
+  providers: [usuarioService,programasService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
