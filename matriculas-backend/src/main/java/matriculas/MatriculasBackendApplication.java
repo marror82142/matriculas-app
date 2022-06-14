@@ -9,5 +9,4 @@ public class MatriculasBackendApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(MatriculasBackendApplication.class, args);
 	}
-
 }
