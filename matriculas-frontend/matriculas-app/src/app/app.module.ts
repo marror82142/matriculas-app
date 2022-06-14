@@ -11,7 +11,7 @@ import { programasService } from './usuarios/programas.service';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormComponent } from './usuarios/form.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './usuarios/login.component';
 
 const routes: Routes = [
@@ -20,6 +20,7 @@ const routes: Routes = [
   {path: 'usuarios', component: usuarioComponent},
   {path: 'usuarios/form', component: FormComponent},
   {path: 'programas', component: programasComponent},
+  {path: 'usuarios/form/:cedula', component: FormComponent},
 ]
 
 @NgModule({
@@ -35,7 +36,8 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     HttpClientModule,
-    FormsModule,
+    FormsModule,    
+    ReactiveFormsModule,
     RouterModule.forRoot(routes)
   ],
   providers: [usuarioService,programasService],
