@@ -30,9 +30,14 @@ public getProgramas(): void{
     alert("Los campos son requeridos");
   }else{
     this.programasService.create(this.programas).subscribe(
-      response => this.router.navigate(['/programas'])
+      response => {        
+        this.programasService.getListaProgramas().subscribe(
+          listaProgramas => this.listaProgramas = listaProgramas
+        );
+        this.router.navigate(['/programas'])
+      }
     )
-  }
+  }  
 }
 
 }
