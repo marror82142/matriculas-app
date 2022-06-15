@@ -10,7 +10,6 @@ import { usuarioService } from './usuarios/usuario.service';
 import { programasService } from './usuarios/programas.service';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { FormComponent } from './usuarios/form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './usuarios/login.component';
 
@@ -18,9 +17,7 @@ const routes: Routes = [
   {path: '', redirectTo: '', pathMatch:'full'},
   {path: 'login', component: LoginComponent},
   {path: 'usuarios', component: usuarioComponent},
-  {path: 'usuarios/form', component: FormComponent},
   {path: 'programas', component: programasComponent},
-  {path: 'usuarios/form/:cedula', component: FormComponent},
 ]
 
 @NgModule({
@@ -29,7 +26,6 @@ const routes: Routes = [
     HeaderComponent,
     FooterComponent,
     usuarioComponent,
-    FormComponent,
     LoginComponent,
     programasComponent
   ],
