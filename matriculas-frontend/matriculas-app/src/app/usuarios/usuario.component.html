@@ -38,19 +38,17 @@
           <input type="text" class="form-control" *ngIf="usuarioEditar" [(ngModel)]="usuarioEditar.empresaTrabajo" name="empresaTrabajo" required="true">
         </div>
       </div>
-      <div class="form-group row center">
+      <div class="form-group row center"  *ngIf="!usuarioEditar">
         <label for="nombreUsuario" class="col-form-label col-sm-2">Nombre de usuario</label>
         <div class="col-sm-6 my-2">
-          <input type="text" class="form-control" *ngIf="!usuarioEditar" [(ngModel)]="usuario.nombreUsuario" name="nombreUsuario" required="true">
-          <input type="text" class="form-control" *ngIf="usuarioEditar" [(ngModel)]="usuarioEditar.nombreUsuario" name="nombreUsuario" required="true">
+          <input type="text" class="form-control" [(ngModel)]="usuario.nombreUsuario" name="nombreUsuario" required="true">
 
         </div>
       </div>
-      <div class="form-group row center">
+      <div class="form-group row center"  *ngIf="!usuarioEditar">
         <label for="contrasena" class="col-form-label col-sm-2">Contrasena</label>
         <div class="col-sm-6 my-2">
-          <input type="text" class="form-control" *ngIf="!usuarioEditar" [(ngModel)]="usuario.contrasena" name="contrasena" required="true">
-          <input type="text" class="form-control" *ngIf="usuarioEditar"  [(ngModel)]="usuarioEditar.contrasena" name="contrasena" required="true">
+          <input type="text" class="form-control" [(ngModel)]="usuario.contrasena" name="contrasena" required="true">
         </div>
       </div>
       <div class="form-group row center">
