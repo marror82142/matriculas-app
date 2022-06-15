@@ -9,18 +9,23 @@ import {programasService} from './programas.service';
   templateUrl: './programas.component.html'
 })
 export class programasComponent implements OnInit {
+  tipos:string[]=["Posgrado","Pregrado","Tecnologia", "Tecnica"];
+  listaProgramas: programas[];
+
   public programas: programas = new programas;
   public title = "Crear usuario";
   constructor(private programasService: programasService,
               private router: Router) { }
 
   ngOnInit(): void {
+    this.programasService.getListaProgramas().subscribe(
+      listaProgramas => this.listaProgramas = listaProgramas
+    );
   }
 
 public getProgramas(): void{
   if(this.programas.nombre == null || 
-    this.programas.codigo == null || 
-    this.programas.tipo == null
+    this.programas.codigo == null
   ){
     alert("Los campos son requeridos");
   }else{

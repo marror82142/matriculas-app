@@ -24,10 +24,8 @@ export class programasService {
     return this.http.get<programas>(request);
   }
 
- // login(programas: programas): Observable<programas>{
- //   let request = this.endpointUrl+ '/login' + '?nombreUsuario=' + usuario.nombreUsuario
- //                                  + '&contrasena=' + usuario.contrasena;
-  //  return this.http.get<programas>(request);
- // }
+  getListaProgramas(): Observable<programas[]>{
+    return this.http.get<programas[]>(this.endpointUrl);
+  }
   
 }
