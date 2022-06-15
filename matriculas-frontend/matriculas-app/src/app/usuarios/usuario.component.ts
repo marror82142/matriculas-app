@@ -14,6 +14,8 @@ export class usuarioComponent implements OnInit {
 
   usuarios: usuario[];
   public usuario: usuario = new usuario;
+  public usuarioEditar: usuario = null;
+
   public title = "Crear usuario";
   constructor(private usuarioService: usuarioService,
               private router: Router,
@@ -61,17 +63,13 @@ export class usuarioComponent implements OnInit {
     })
   }
 
-  public create(): void{
-    if(this.usuario.cedula == null
-      || this.usuario.nombre == null
-      || this.usuario.rol == null
-      || this.usuario.profesion == null
-      || this.usuario.empresaTrabajo == null
-      || this.usuario.nombreUsuario == null
-      || this.usuario.contrasena == null
-      || this.usuario.fechaNacimiento == null
-    ){
-      swal.fire("Los campos son requeridos");
+  public create(): void{    
+    if(this.usuarioEditar.cedula!=null){
+      if(!moment(this.usuarioEditar.fechaNacimiento, 'YYYY-MM-DD',true).isValid()){
+        swal.fire("Formato de fecha incorrecto.");
+      }else{
+        this.update();
+      }
     }else{
       if(!moment(this.usuario.fechaNacimiento, 'YYYY-MM-DD',true).isValid()){
         swal.fire("Formato de fecha incorrecto.");
@@ -82,7 +80,7 @@ export class usuarioComponent implements OnInit {
             usuarios => this.usuarios = usuarios
           );
           this.router.navigate(['/usuarios'])
-          swal.fire('Nuevo usuario', `usuario ${usuario.nombre} creado`, 'success')
+          swal.fire('Nuevo usuario', `usuario ${usuario.nombreUsuario} creado`, 'success')
         }
         );
       }
@@ -90,16 +88,16 @@ export class usuarioComponent implements OnInit {
   }
 
   update():void{
-    this.usuarioService.update(this.usuario)
-    .subscribe( usuario => {
+    this.usuarioService.update(this.usuarioEditar)
+    .subscribe( usuarioEditar => {
       this.router.navigate(['/usuarios'])
-      swal.fire('Usuario actualizado', `usuario ${usuario.nombre} actualizado`, 'success')
+      swal.fire('Usuario actualizado', `usuario ${usuarioEditar.nombreUsuario} actualizado`, 'success')
     }
     )
   }
 
   edit(usuarioEditar: usuario):void{
-    this.usuario = usuarioEditar;
+    this.usuarioEditar = usuarioEditar;
   }
 
 }
