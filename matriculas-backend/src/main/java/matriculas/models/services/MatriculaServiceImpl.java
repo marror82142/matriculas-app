@@ -35,8 +35,8 @@ public class MatriculaServiceImpl implements IMatriculaService {
 
 	@Override
 	@Transactional
-	public void delete(Long cedula) {
-		matriculaDao.deleteById(cedula);
+	public void delete(Long id) {
+		matriculaDao.deleteById(id);
 	}
 
 }

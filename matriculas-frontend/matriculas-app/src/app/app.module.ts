@@ -4,10 +4,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+
 import { usuarioComponent } from './usuarios/usuario.component';
 import { programaComponent } from './programas/programa.component';
+import { matriculaComponent } from './matriculas/matricula.component';
+
 import { usuarioService } from './usuarios/usuario.service';
 import { programaService } from './programas/programa.service';
+import { matriculaService } from './matriculas/matricula.service';
+
+
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -18,6 +24,8 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'usuarios', component: usuarioComponent},
   {path: 'programas', component: programaComponent},
+  {path: 'matriculas', component: matriculaComponent},
+  
 ]
 
 @NgModule({
@@ -27,7 +35,8 @@ const routes: Routes = [
     FooterComponent,
     usuarioComponent,
     LoginComponent,
-    programaComponent
+    programaComponent,
+    matriculaComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +45,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [usuarioService,programaService],
+  providers: [usuarioService,programaService,matriculaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

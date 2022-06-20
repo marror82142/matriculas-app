@@ -24,7 +24,8 @@ public class Matricula implements Serializable {
 	@Column(name="fecha_matricula")
 	private LocalDate fechaMatricula;
 	private Integer valor;
-	
+	private String estado;
+
 	public Long getId(){
 		return id;
 	}
@@ -64,5 +65,14 @@ public class Matricula implements Serializable {
 	public void setValor(Integer valor) {
 		this.valor = valor;
 	}
+
+	public String getEstado(){
+		return estado;
+	}
+
+	public void setEstado(String estado){
+		this.estado = estado;
+	}
+	
 
 }

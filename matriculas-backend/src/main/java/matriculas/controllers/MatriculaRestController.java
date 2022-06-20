@@ -47,7 +47,8 @@ public class MatriculaRestController {
 							@RequestParam String usuario, //tipo Usuario
 							@RequestParam String programa, //tipo Programa
 							@RequestParam LocalDate fecha_matricula,
-							@RequestParam Integer valor
+							@RequestParam Integer valor,
+							@RequestParam String estado
 							){
 		
 		Matricula matricula = new Matricula();
@@ -56,6 +57,7 @@ public class MatriculaRestController {
 		matricula.setPrograma(programa);
 		matricula.setFechaMatricula(fecha_matricula);
 		matricula.setValor(valor);
+		matricula.setEstado(estado);
 
 		return create(matricula);
 	}
@@ -77,6 +79,7 @@ public class MatriculaRestController {
 		current.setPrograma(matricula.getPrograma());
 		current.setFechaMatricula(matricula.getFechaMatricula());
 		current.setValor(matricula.getValor());
+		current.setEstado(matricula.getEstado());
 
 		return matriculaService.save(current);
 	}
