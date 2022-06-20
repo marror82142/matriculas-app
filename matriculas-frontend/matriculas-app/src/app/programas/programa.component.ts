@@ -68,6 +68,15 @@ export class programaComponent implements OnInit {
     if(this.programaEditar!= undefined && this.programaEditar.codigo!=null){
         this.update();
     }else{
+        this.programaService.search(this.programa)
+        .subscribe( programa => {
+          if(programa!=null){
+            this.router.navigate(['/programas'])
+            swal.fire('Codigo duplicado', `el codigo que esta intentando ingresar ya existe`, 'error')
+            return
+          }
+        }
+        )
 
         this.programaService.create(this.programa)
         .subscribe(programa => {
@@ -78,7 +87,6 @@ export class programaComponent implements OnInit {
           swal.fire('Nuevo programa creado', `programa creado`, 'success')
         }
         );
-      
     }
   }
 

@@ -24,7 +24,10 @@ export class programaService {
   create(programa: programa): Observable<programa>{
     return this.http.post<programa>(this.endpointUrl, programa, {headers: this.httpHeaders});
   }
-  
+
+  search(programa: programa): Observable<programa>{
+    return this.http.put<programa>(`${this.endpointUrl}/buscar/${programa.codigo}`, programa, {headers: this.httpHeaders})
+  }
   update(programa: programa): Observable<programa>{
     return this.http.put<programa>(`${this.endpointUrl}/${programa.id}`, programa, {headers: this.httpHeaders})
   }
