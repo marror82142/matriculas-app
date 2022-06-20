@@ -19,6 +19,7 @@ public class Programa implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
+	@Column(unique=true)
 	private String codigo;
 	private String tipo;
 	private String nombre;

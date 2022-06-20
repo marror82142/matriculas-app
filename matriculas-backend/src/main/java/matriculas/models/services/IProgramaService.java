@@ -11,5 +11,7 @@ public interface IProgramaService {
 	
 	public Programa findById(Long id);
 	
+	public Programa findByCodigo(String codigo);
+	
 	public void delete(Long id);
 }

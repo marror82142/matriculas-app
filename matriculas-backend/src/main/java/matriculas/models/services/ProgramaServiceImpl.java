@@ -1,5 +1,6 @@
 package matriculas.models.services;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,21 @@ public class ProgramaServiceImpl implements IProgramaService {
 	public Programa findById(Long id) {
 		return programaDao.findById(id).orElse(null);
 	}
-
+	
+	@Override
+	@Transactional(readOnly = true)
+	public Programa findByCodigo(String codigo) {
+		List<Programa> programas = (List<Programa>) programaDao.findAll();
+		for (Iterator iterator = programas.iterator(); iterator.hasNext();) {
+			Programa programa = (Programa) iterator.next();
+			if(programa.getCodigo().equals(codigo)) {
+				return programa;
+			}
+			
+		}
+		return null;
+	}
+	
 	@Override
 	@Transactional
 	public void delete(Long id) {
