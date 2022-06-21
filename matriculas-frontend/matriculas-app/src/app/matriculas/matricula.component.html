@@ -6,8 +6,10 @@
             <div class="form-group row center">
                 <label for="usuario" class="col-form-label col-sm-2">Usuario</label>
                 <div class="col-sm-6 my-2">
-                    <input type="text" class="form-control nuevo" *ngIf="!matriculaEditar" [(ngModel)]="matricula.usuario" name="usuario" required="true">
-                    <input type="text" class="form-control" *ngIf="matriculaEditar" [(ngModel)]="matriculaEditar.usuario" name="usuario" required="true">
+                    <select name="usuario" class="form-select nuevo" *ngIf="!matriculaEditar" [(ngModel)]="matricula.usuario">
+                        <option [value]="0">seleccione</option>
+                        <option [value]="item" *ngFor="let item of usuarios">{{item.nombre}}</option>
+                    </select>
                 </div>
             </div>
 

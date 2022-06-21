@@ -1,9 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {matricula} from './matricula';
 import {matriculaService} from './matricula.service';
+
+import {usuarioService} from '../usuarios/usuario.service';
 import swal from 'sweetalert2';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
+import { usuario } from '../usuarios/usuario';
 
 @Component({
   selector: 'app-usuarios',
@@ -12,18 +15,26 @@ import * as moment from 'moment';
 
 export class matriculaComponent implements OnInit {
 
+
+
   matriculas: matricula[];
   public matricula: matricula = new matricula;
   public matriculaEditar: matricula = null;
   estados:string[]=["Activo","Inactivo"];
+  usuarios:usuario[]=[]
+
   public title = "Crear Matricula";
   constructor(private matriculaService: matriculaService,
+              private usuarioService: usuarioService,
               private router: Router,
               private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(){
     this.matriculaService.getMatriculas().subscribe(
       matriculas => this.matriculas = matriculas
+    ); 
+    this.usuarioService.getUsuarios().subscribe(
+      usuarios => this.usuarios = usuarios
     );
   }
 
