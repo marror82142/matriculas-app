@@ -1,3 +1,5 @@
+import { contacto } from "./contacto";
+
 export class usuario {
   cedula: number;
   nombre: string;
@@ -7,4 +9,5 @@ export class usuario {
   nombreUsuario: string;
   contrasena: string;
   fechaNacimiento: string;
+  infoContacto: contacto;
 }

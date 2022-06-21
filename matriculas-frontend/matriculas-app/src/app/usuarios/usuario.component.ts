@@ -4,6 +4,7 @@ import {usuarioService} from './usuario.service';
 import swal from 'sweetalert2';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
+import { contacto } from './contacto';
 
 @Component({
   selector: 'app-usuarios',
@@ -13,6 +14,7 @@ import * as moment from 'moment';
 export class usuarioComponent implements OnInit {
 
   usuarios: usuario[];
+  public infoContacto: contacto = new contacto();
   public usuario: usuario = new usuario;
   public usuarioEditar: usuario = null;
 
@@ -64,7 +66,7 @@ export class usuarioComponent implements OnInit {
   }
 
   public create(): void{    
-    if(this.usuarioEditar.cedula!=null){
+    if(this.usuarioEditar!=null){
       if(!moment(this.usuarioEditar.fechaNacimiento, 'YYYY-MM-DD',true).isValid()){
         swal.fire("Formato de fecha incorrecto.");
       }else{
@@ -74,6 +76,7 @@ export class usuarioComponent implements OnInit {
       if(!moment(this.usuario.fechaNacimiento, 'YYYY-MM-DD',true).isValid()){
         swal.fire("Formato de fecha incorrecto.");
       }else{
+        this.usuario.infoContacto = this.infoContacto
         this.usuarioService.create(this.usuario)
         .subscribe(usuario => {
           this.usuarioService.getUsuarios().subscribe(
