@@ -67,6 +67,7 @@ public class ProgramaRestController {
 	//Actualizar programa
 	@PutMapping("/programas/{id}")
 	public Programa update(@RequestBody Programa programa, @PathVariable Long id){
+		
 		Programa current = programaService.findById(id);
 		
 		current.setId(programa.getId());
@@ -76,6 +77,20 @@ public class ProgramaRestController {
 
 		return programaService.save(current);
 	}
+	
+	//buscar programa por codigo
+		@PutMapping("/programas/buscar/{codigo}")
+		public Programa search(@RequestBody Programa programa, @PathVariable String codigo){
+			
+			Programa current = programaService.findByCodigo(codigo);
+			if(current!=null) {
+				return current;
+			}else {
+				return null;
+			}
+			
+			
+		}
 	
 	//Eliminar programa
 	@DeleteMapping("/programas/{id}")
