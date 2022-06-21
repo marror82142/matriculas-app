@@ -16,8 +16,10 @@
             <div class="form-group row center">
                 <label for="programa" class="col-form-label col-sm-2">Programa</label>
                 <div class="col-sm-6 my-2">
-                    <input type="text" class="form-control nuevo" *ngIf="!matriculaEditar" [(ngModel)]="matricula.programa" name="programa" required="true">
-                    <input type="text" class="form-control" *ngIf="matriculaEditar" [(ngModel)]="matriculaEditar.programa" name="programa" required="true">
+                    <select name="programa" class="form-select nuevo" *ngIf="!matriculaEditar" [(ngModel)]="matricula.programa">
+                        <option [value]="0">seleccione</option>
+                        <option [value]="item" *ngFor="let item of programas">{{item.nombre}}</option>
+                    </select>
                 </div>
             </div>
 
@@ -81,8 +83,8 @@
                 <tbody>
                     <tr *ngFor="let item of matriculas">
                         <td>{{ item.id }} </td>
-                        <td>{{ item.usuario }} </td>
-                        <td>{{ item.programa }}</td>
+                        <td>{{ item.usuario}} </td>
+                        <td>{{ item.programa}}</td>
                         <td>{{ item.fechaMatricula }}</td>
                         <td>{{ item.valor }}</td>
                         <td>{{ item.estado }}</td>
