@@ -1,5 +1,5 @@
 <div class="card border-primary mb-3">
-  <div class="bg-dark text-white">
+  <div class="text-white" style="background-color: #196844;">
     <div class="card-header">{{title}}</div>
     <div class="card-body"></div>
     <form (ngSubmit) = "create()" class="center">
@@ -11,7 +11,7 @@
         </div>
       </div>
       <div class="form-group row center">
-        <label for="nombre" class="col-form-label col-sm-2">Nombre</label>
+        <label for="nombre" class="col-form-label col-sm-2">Nombre Completo</label>
         <div class="col-sm-6 my-2">
           <input type="text" class="form-control" *ngIf="!usuarioEditar" [(ngModel)]="usuario.nombre" name="nombre" required="true">
           <input type="text" class="form-control" *ngIf="usuarioEditar" [(ngModel)]="usuarioEditar.nombre" name="nombre" required="true">
@@ -59,6 +59,41 @@
         </div>
       </div>
       <div class="form-group row center">
+        <label for="correoInstitucional" class="col-form-label col-sm-2">Correo Institucional</label>
+        <div class="col-sm-6 my-2">
+          <input type="text" class="form-control" *ngIf="!usuarioEditar" [(ngModel)]="infoContacto.correoInstitucional" name="correoInstitucional" required="true">
+          <input type="text" class="form-control" *ngIf="usuarioEditar" [(ngModel)]="infoContacto.correoInstitucional" name="correoInstitucional" required="true">
+        </div>
+      </div>
+      <div class="form-group row center">
+        <label for="correoPersonal" class="col-form-label col-sm-2">Correo Personal</label>
+        <div class="col-sm-6 my-2">
+          <input type="text" class="form-control" *ngIf="!usuarioEditar" [(ngModel)]="infoContacto.correoPersonal" name="correoPersonal" required="true">
+          <input type="text" class="form-control" *ngIf="usuarioEditar" [(ngModel)]="infoContacto.correoPersonal" name="correoPersonal" required="true">
+        </div>
+      </div>
+      <div class="form-group row center">
+        <label for="direccion" class="col-form-label col-sm-2">Direccion</label>
+        <div class="col-sm-6 my-2">
+          <input type="text" class="form-control" *ngIf="!usuarioEditar" [(ngModel)]="infoContacto.direccion" name="direccion" required="true">
+          <input type="text" class="form-control" *ngIf="usuarioEditar" [(ngModel)]="infoContacto.direccion" name="direccion" required="true">
+        </div>
+      </div>
+      <div class="form-group row center">
+        <label for="ciudadResidencia" class="col-form-label col-sm-2">Ciudad Residencia</label>
+        <div class="col-sm-6 my-2">
+          <input type="text" class="form-control" *ngIf="!usuarioEditar" [(ngModel)]="infoContacto.ciudadResidencia" name="ciudadResidencia" required="true">
+          <input type="text" class="form-control" *ngIf="usuarioEditar" [(ngModel)]="infoContacto.ciudadResidencia" name="ciudadResidencia" required="true">
+        </div>
+      </div>
+      <div class="form-group row center">
+        <label for="telefono" class="col-form-label col-sm-2">Telefono</label>
+        <div class="col-sm-6 my-2">
+          <input type="text" class="form-control" *ngIf="!usuarioEditar" [(ngModel)]="infoContacto.telefono" name="telefono" required="true">
+          <input type="text" class="form-control" *ngIf="usuarioEditar" [(ngModel)]="infoContacto.telefono" name="telefono" required="true">
+        </div>
+      </div>
+      <div class="form-group row center">
         <div class="col-sm-12 center my-2">
           <button class="btn btn-primary " *ngIf="!usuarioEditar" name="button">Guardar</button>
           <button class="btn btn-primary " *ngIf="usuarioEditar" name="button">Actualizar</button>
@@ -67,10 +102,10 @@
     </form>
   </div>  
 
-  <div class="card-body text-primary">
-    <h5 class="card-title">Usuarios</h5>
+  <div class="card-body text-primary" style="background-color: #196844;">
+    <h5 class="card-title" style="color: white;">Usuarios</h5>
 
-    <table class="table table-bordered table-striped">
+    <table class="table table-striped" style="color: white;">
       <thead>
         <tr>
           <th>Cedula</th>
@@ -79,18 +114,27 @@
           <th>Profesion</th>
           <th>Empresa donde trabaja</th>
           <th>Fecha Nacimiento</th>
+          <th>Correo Institucional</th>
+          <th>Correo Personal</th>
+          <th>Direccion</th>
+          <th>Telefono</th>
           <th>Nombre Usuario</th>
+          <th></th>
         </tr>
       </thead>
-      <tbody>
+      <tbody style="color: white;">
         <tr *ngFor="let item of usuarios">
-          <td>{{ item.cedula }}</td>
-          <td>{{ item.nombre }} </td>
-          <td>{{ item.rol }} </td>
-          <td>{{ item.profesion }}</td>
-          <td>{{ item.empresaTrabajo }}</td>
-          <td>{{ item.fechaNacimiento }}</td>
-          <td>{{ item.nombreUsuario }}</td>
+          <td style="color: white;">{{ item.cedula }}</td>
+          <td style="color: white;">{{ item.nombre }} </td>
+          <td style="color: white;">{{ item.rol }} </td>
+          <td style="color: white;">{{ item.profesion }}</td>
+          <td style="color: white;">{{ item.empresaTrabajo }}</td>
+          <td style="color: white;">{{ item.fechaNacimiento }}</td>
+          <td style="color: white;">{{ item.infoContacto.correoInstitucional }}</td>
+          <td style="color: white;">{{ item.infoContacto.correoPersonal }}</td>
+          <td style="color: white;">{{ item.infoContacto.direccion }}</td>
+          <td style="color: white;">{{ item.infoContacto.telefono }}</td>
+          <td style="color: white;">{{ item.nombreUsuario }}</td>
           <td>
             <button type="button" name="edit" (click)='edit(item)' class="btn btn-primary btn-sm"><span class="bi bi-pencil"></span></button>
             <button type="button" name="delete" (click)='delete(item)' class="btn btn-danger btn-sm"><span class="bi bi-trash"></span></button>
