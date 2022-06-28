@@ -5,6 +5,9 @@ import swal from 'sweetalert2';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
 import { contacto } from './contacto';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-usuarios',
@@ -101,6 +104,42 @@ export class usuarioComponent implements OnInit {
 
   edit(usuarioEditar: usuario):void{
     this.usuarioEditar = usuarioEditar;
+  }
+
+  createPdf(){
+    console.log('entro al metodo');
+    let arra =  [];
+    this.usuarios.forEach(function (value) {
+      console.log(value.cedula);
+      console.log(value.contrasena);
+      console.log(value.empresaTrabajo);
+      console.log(value.fechaNacimiento);
+      console.log(value.nombre);
+      console.log(value.nombreUsuario);
+      console.log(value.profesion);
+      console.log(value.rol);
+      console.log('info contacto'+value.infoContacto.id);
+      arra = [value.cedula, value.contrasena, value.empresaTrabajo,value.fechaNacimiento,value.nombre,value.nombreUsuario,value.profesion,value.rol,value.infoContacto.id];
+    });
+
+    const pdfDefinition: any = {
+      content:[{text: 'Reporte de usuarios', style: 'subheader'},
+      'La siguiente tabla contiene informacion de los usuarios',
+      {
+        style: 'tableExample',
+        table: {
+          body: [
+            ['Cedula', 'Contraseña', 'Empresa', 'Fecha_nacimiento','nombre', 'nombre de usuario','profesion','rol','contacto'],
+            arra
+          ]
+        }
+      }]
+    }
+    console.log(pdfDefinition);
+    const pdf = pdfMake.createPdf(pdfDefinition);
+    console.log(pdf);
+    pdf.open();
+    
   }
 
 }

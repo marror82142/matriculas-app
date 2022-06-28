@@ -18,6 +18,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './usuarios/login.component';
+import { PdfComponent } from './pdf/pdf.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '', pathMatch:'full'},
@@ -25,6 +26,7 @@ const routes: Routes = [
   {path: 'usuarios', component: usuarioComponent},
   {path: 'programas', component: programaComponent},
   {path: 'matriculas', component: matriculaComponent},
+  {path: 'pdf', component: PdfComponent},
   
 ]
 
@@ -36,7 +38,8 @@ const routes: Routes = [
     usuarioComponent,
     LoginComponent,
     programaComponent,
-    matriculaComponent
+    matriculaComponent,
+    PdfComponent
   ],
   imports: [
     BrowserModule,
