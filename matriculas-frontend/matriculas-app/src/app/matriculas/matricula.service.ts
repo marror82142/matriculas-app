@@ -35,5 +35,4 @@ export class matriculaService {
   delete(id: number): Observable<matricula>{
     return this.http.delete<matricula>(`${this.endpointUrl}/${id}`, {headers: this.httpHeaders})
   }
-  
 }

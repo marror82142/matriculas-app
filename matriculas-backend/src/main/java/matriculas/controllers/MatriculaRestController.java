@@ -26,6 +26,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import matriculas.models.entity.Matricula;
+import matriculas.models.entity.Programa;
+import matriculas.models.entity.Usuario;
 import matriculas.models.services.IMatriculaService;
 
 
@@ -42,26 +44,11 @@ public class MatriculaRestController {
 		return matriculaService.findAll();
 	}
 	
-	@GetMapping("/matriculas/matricula")
-	public Matricula show(@RequestParam Long id,
-							@RequestParam String usuario, //tipo Usuario
-							@RequestParam String programa, //tipo Programa
-							@RequestParam LocalDate fecha_matricula,
-							@RequestParam Integer valor,
-							@RequestParam String estado
-							){
-		
-		Matricula matricula = new Matricula();
-		matricula.setId(id);
-		matricula.setUsuario(usuario);
-		matricula.setPrograma(programa);
-		matricula.setFechaMatricula(fecha_matricula);
-		matricula.setValor(valor);
-		matricula.setEstado(estado);
-
-		return create(matricula);
+	@GetMapping("/matriculas/{id}")
+	public Matricula show(@PathVariable Long id){
+		return matriculaService.findById(id);
 	}
-	
+
 	@PostMapping("/matriculas")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Matricula create(@RequestBody Matricula matricula){			

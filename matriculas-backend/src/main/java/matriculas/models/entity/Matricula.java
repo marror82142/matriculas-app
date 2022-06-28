@@ -3,11 +3,14 @@ package matriculas.models.entity;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -19,8 +22,15 @@ public class Matricula implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-	private String usuario;
-	private String programa;
+
+	@OneToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "usuario_cedula", referencedColumnName = "cedula")
+	private Usuario usuario;
+
+	@OneToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "programa_id", referencedColumnName = "id")
+	private Programa programa;
+
 	@Column(name="fecha_matricula")
 	private LocalDate fechaMatricula;
 	private Integer valor;
@@ -34,19 +44,19 @@ public class Matricula implements Serializable {
 		this.id = id;
 	}
 
-	public String getUsuario() {
+	public Usuario getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(String usuario) {
+	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
 
-	public String getPrograma() {
+	public Programa getPrograma() {
 		return programa;
 	}
 
-	public void setPrograma(String programa) {
+	public void setPrograma(Programa programa) {
 		this.programa = programa;
 	}
 

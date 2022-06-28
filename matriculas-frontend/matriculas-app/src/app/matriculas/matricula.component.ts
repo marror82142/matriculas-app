@@ -11,6 +11,10 @@ import * as moment from 'moment';
 import { usuario } from '../usuarios/usuario';
 import { programa } from '../programas/programa';
 
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
 @Component({
   selector: 'app-usuarios',
   templateUrl: './matricula.component.html'
@@ -24,6 +28,12 @@ export class matriculaComponent implements OnInit {
   estados:string[]=["Activo","Inactivo"];
   usuarios:usuario[]=[]
   programas:programa[]=[]
+  
+
+  selectUser:any;
+  selectProg:any;
+  usuario:String;
+  programa:String;
 
   public title = "Crear Matricula";
   constructor(private matriculaService: matriculaService,
@@ -46,69 +56,28 @@ export class matriculaComponent implements OnInit {
     );
   }
 
-  /* Borrar no está habilitado para la matricula
-  delete(programa: programa): void {
-    swal.fire({
-      title: 'Esta seguro?',
-      text: `Quiere eliminar este programa ${programa.nombre}?`,
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Confirmar',
-      cancelButtonText: 'Cancelar',
-      reverseButtons: true
-    }).then((result) => {
-      if (result.value) {
-
-        this.programaService.delete(programa.id).subscribe(
-          response => {
-            this.programas = this.programas.filter(cli => cli !== programa)
-            swal.fire(
-              'Programa Eliminado',
-              `Programa ${programa.nombre} eliminado correctamente.`,
-              'success'
-            )
-          }
-        )
-
-      }
-    })
-  }
-  */
-
-  /*DUDA
-  getUsuario(): void{
-    this.activatedRoute.params.subscribe(params => {
-      let cedula = params['cedula']
-      if(cedula){
-        this.programaService.getPrograma(cedula).subscribe( (programa) => this.programa = programa)
-      }
-    })
-  }
-  */
-
   public create(): void{    
     if(this.matriculaEditar!= undefined && this.matriculaEditar.usuario!=null){
         this.update();
     }else{
-        this.matriculaService.search(this.matricula)
-        .subscribe( matricula => {
-          if(matricula!=null){
-            this.router.navigate(['/matriculas'])
-            swal.fire('Usuario ya registrado', `el usuario que esta intentando ingresar ya existe`, 'error')
-            return
-          }
-        }
-        )
 
-        this.matriculaService.create(this.matricula)
-        .subscribe(matricula => {
-          this.matriculaService.getMatriculas().subscribe(
-            matriculas => this.matriculas = matriculas
+        this.matriculas.find(m => {
+          if(m.usuario.cedula == this.selectUser.cedula && m.programa.codigo == this.selectProg.codigo){
+            swal.fire('Error', `Matricula ya existente`, 'error')
+          }else{
+            this.matriculaService.create(this.matricula)
+            .subscribe(matricula => {
+            this.matriculaService.getMatriculas().subscribe(
+              matriculas => this.matriculas = matriculas
+            );
+            this.router.navigate(['/matriculas'])
+            swal.fire('Nueva Matricula', `Matricula creada`, 'success')
+          }
           );
-          this.router.navigate(['/matriculas'])
-          swal.fire('Nueva Matricula', `Matricula creada`, 'success')
-        }
-        );
+          }
+        });
+
+        
     }
   }
 
@@ -116,7 +85,7 @@ export class matriculaComponent implements OnInit {
     this.matriculaService.update(this.matriculaEditar)
     .subscribe( matriculaEditar => {
       this.router.navigate(['/matriculas'])
-      swal.fire('matricula actualizada', `usuario ${matriculaEditar.usuario} actualizado`, 'success')
+      swal.fire('matricula actualizada', `usuario ${matriculaEditar.usuario.nombre} actualizado`, 'success')
     }
     )
     this.matriculaEditar =null;
@@ -133,4 +102,78 @@ export class matriculaComponent implements OnInit {
     this.matriculaEditar = matriculaEditar;
   }
 
+  selectPrograma(event: Event): void{
+    const target = event.target as HTMLInputElement;  
+    console.log("selecciona : " + target.value +" "+ typeof(target.value));
+
+    this.programas.find(p =>{
+      if(p.codigo == this.selectProg.codigo){
+        this.matricula.programa = p;
+      }
+    });
+
+    console.log(this.matricula.programa.codigo);
+    
+  }
+  selectUsuario(event: Event): void{
+    const target = event.target as HTMLInputElement;  
+    console.log("selecciona : " + this.selectUser.cedula +target+" "+ typeof(target.value));
+    
+    this.usuarios.find(u => {
+      if(u.cedula == this.selectUser.cedula){
+        this.matricula.usuario = u;
+      }
+    });
+
+    console.log(this.matricula.usuario.cedula);
+    
+  }
+
+  /*exportTable(): void{
+    const downloadLink = document.createElement('a');
+    const dataType = 'matriculas/vnd.ms-excel';
+    const table = document.getElementById('tabla-matricula');
+    const tableHtml = table.outerHTML.replace(/ /g, '%20');
+    const fileName = "matriculas.xlsx";
+    document.body.appendChild(downloadLink);
+    downloadLink.href = 'data' + dataType + ' ' + tableHtml;
+    downloadLink.download = 'matriculas.xlsx';
+    downloadLink.click();
+  }*/
+
+  exportTable(){
+    let a =  [];
+    this.matriculas.forEach(function (value) {
+      a = [
+        value.estado, 
+        value.fechaMatricula, 
+        value.id, 
+        value.programa.nombre, 
+        value.usuario.nombre, 
+        value.valor];
+    });
+
+    const pdfDefinition: any = {
+      content:[{text: 'Reporte de matriculas', style: 'subheader'},
+      'La siguiente tabla contiene informacion de las matriculas',
+      {
+        style: 'tableExample',
+        table: {
+          body: [
+            ['Estado', 'Fecha matricula', 'id', 'Programa','Usuario','Valor'],
+            a
+          ]
+        }
+      }]
+    }
+    console.log(pdfDefinition);
+    const pdf = pdfMake.createPdf(pdfDefinition);
+    console.log(pdf);
+    pdf.open();
+    
+  }
+
+
 }
+
+

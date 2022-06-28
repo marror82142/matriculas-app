@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import matriculas.models.entity.Programa;
+import matriculas.models.entity.Usuario;
 import matriculas.models.services.IProgramaService;
 
 
@@ -42,20 +43,9 @@ public class ProgramaRestController {
 		return programaService.findAll();
 	}
 	
-	@GetMapping("/programas/programa")
-	public Programa show(@RequestParam Long id,
-							@RequestParam String codigo, 
-							@RequestParam String tipo,
-							@RequestParam String nombre
-							){
-		
-		Programa programa = new Programa();
-		programa.setId(id);
-		programa.setCodigo(codigo);
-		programa.setTipo(tipo);
-		programa.setNombre(nombre);
-
-		return create(programa);
+	@GetMapping("/programas/{id}")
+	public Programa show(@PathVariable Long id){
+		return programaService.findById(id);
 	}
 	
 	@PostMapping("/programas")

@@ -6,9 +6,10 @@
             <div class="form-group row center">
                 <label for="usuario" class="col-form-label col-sm-2">Usuario</label>
                 <div class="col-sm-6 my-2">
-                    <select name="usuario" class="form-select nuevo" *ngIf="!matriculaEditar" [(ngModel)]="matricula.usuario">
-                        <option [value]="0">seleccione</option>
-                        <option [value]="item" *ngFor="let item of usuarios">{{item.nombre}}</option>
+                    <select [(ngModel)]="selectUser" [disabled]="false" (change)="selectUsuario($event)" name="usuario" class="form-select nuevo" *ngIf="!matriculaEditar">
+                        
+                        <option [ngValue]="item" *ngFor="let item of usuarios">{{item.nombre}}</option>
+
                     </select>
                 </div>
             </div>
@@ -16,9 +17,9 @@
             <div class="form-group row center">
                 <label for="programa" class="col-form-label col-sm-2">Programa</label>
                 <div class="col-sm-6 my-2">
-                    <select name="programa" class="form-select nuevo" *ngIf="!matriculaEditar" [(ngModel)]="matricula.programa">
-                        <option [value]="0">seleccione</option>
-                        <option [value]="item" *ngFor="let item of programas">{{item.nombre}}</option>
+                    <select [(ngModel)]="selectProg" [disabled]="false" (change)="selectPrograma($event)"name="programa" class="form-select nuevo" *ngIf="!matriculaEditar">
+                        
+                        <option [ngValue]="item" *ngFor="let item of programas">{{item.nombre}}</option>
                     </select>
                 </div>
             </div>
@@ -56,6 +57,9 @@
             <div class="form-group row center">
                 <div class="col-sm-12 center my-2">
                     <button class="btn btn-primary " *ngIf="!matriculaEditar" name="button">Guardar</button>
+
+                    <button (click)="exportTable()" btn btn-primary name="button">Descargar</button>
+                    
                     <button class="btn btn-primary " *ngIf="matriculaEditar" name="button">Actualizar</button>
                 </div>
             </div>
@@ -67,7 +71,7 @@
         <div class="card-body text-primary">
             <h5 class="card-title">Matriculas</h5>
 
-            <table class="table table-bordered table-striped">
+            <table class="table table-bordered table-striped" >
                 <thead>
                     <tr>
                         <th>Id</th>
@@ -81,17 +85,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let item of matriculas">
+                    <tr *ngFor="let item of matriculas" id="tabla-matricula">
                         <td>{{ item.id }} </td>
-                        <td>{{ item.usuario}} </td>
-                        <td>{{ item.programa}}</td>
+                        <td>{{ item.usuario.nombre}} </td>
+                        <td>{{ item.programa.nombre}}</td>
                         <td>{{ item.fechaMatricula }}</td>
                         <td>{{ item.valor }}</td>
                         <td>{{ item.estado }}</td>
 
                         <td>
                             <button type="button" name="edit" (click)='edit(item)' class="btn btn-primary btn-sm " title="editar"><span class="bi bi-pencil"></span></button>
-                            <button type="button" name="delete" (click)='delete(item)' class="btn btn-danger btn-sm" title="borrar"><span class="bi bi-trash"></span></button>
                         </td>
                     </tr>
                 </tbody>
