@@ -1,3 +1,4 @@
+<app-header></app-header>
 <div class="card border-primary mb-3">
     <div class="text-white" style="background-color: #196844;">
         <div class="card-header">{{title}}</div>
@@ -62,35 +63,35 @@
                 <label for="correoInstitucional" class="col-form-label col-sm-2">Correo Institucional</label>
                 <div class="col-sm-6 my-2">
                     <input type="text" class="form-control" *ngIf="!usuarioEditar" [(ngModel)]="infoContacto.correoInstitucional" name="correoInstitucional" required="true">
-                    <input type="text" class="form-control" *ngIf="usuarioEditar" [(ngModel)]="infoContacto.correoInstitucional" name="correoInstitucional" required="true">
+                    <input type="text" class="form-control" *ngIf="usuarioEditar" [(ngModel)]="usuarioEditar.infoContacto.correoInstitucional" name="correoInstitucional" required="true">
                 </div>
             </div>
             <div class="form-group row center">
                 <label for="correoPersonal" class="col-form-label col-sm-2">Correo Personal</label>
                 <div class="col-sm-6 my-2">
                     <input type="text" class="form-control" *ngIf="!usuarioEditar" [(ngModel)]="infoContacto.correoPersonal" name="correoPersonal" required="true">
-                    <input type="text" class="form-control" *ngIf="usuarioEditar" [(ngModel)]="infoContacto.correoPersonal" name="correoPersonal" required="true">
+                    <input type="text" class="form-control" *ngIf="usuarioEditar" [(ngModel)]="usuarioEditar.infoContacto.correoPersonal" name="correoPersonal" required="true">
                 </div>
             </div>
             <div class="form-group row center">
                 <label for="direccion" class="col-form-label col-sm-2">Direccion</label>
                 <div class="col-sm-6 my-2">
                     <input type="text" class="form-control" *ngIf="!usuarioEditar" [(ngModel)]="infoContacto.direccion" name="direccion" required="true">
-                    <input type="text" class="form-control" *ngIf="usuarioEditar" [(ngModel)]="infoContacto.direccion" name="direccion" required="true">
+                    <input type="text" class="form-control" *ngIf="usuarioEditar" [(ngModel)]="usuarioEditar.infoContacto.direccion" name="direccion" required="true">
                 </div>
             </div>
             <div class="form-group row center">
                 <label for="ciudadResidencia" class="col-form-label col-sm-2">Ciudad Residencia</label>
                 <div class="col-sm-6 my-2">
                     <input type="text" class="form-control" *ngIf="!usuarioEditar" [(ngModel)]="infoContacto.ciudadResidencia" name="ciudadResidencia" required="true">
-                    <input type="text" class="form-control" *ngIf="usuarioEditar" [(ngModel)]="infoContacto.ciudadResidencia" name="ciudadResidencia" required="true">
+                    <input type="text" class="form-control" *ngIf="usuarioEditar" [(ngModel)]="usuarioEditar.infoContacto.ciudadResidencia" name="ciudadResidencia" required="true">
                 </div>
             </div>
             <div class="form-group row center">
                 <label for="telefono" class="col-form-label col-sm-2">Telefono</label>
                 <div class="col-sm-6 my-2">
                     <input type="text" class="form-control" *ngIf="!usuarioEditar" [(ngModel)]="infoContacto.telefono" name="telefono" required="true">
-                    <input type="text" class="form-control" *ngIf="usuarioEditar" [(ngModel)]="infoContacto.telefono" name="telefono" required="true">
+                    <input type="text" class="form-control" *ngIf="usuarioEditar" [(ngModel)]="usuarioEditar.infoContacto.telefono" name="telefono" required="true">
                 </div>
             </div>
             <div class="form-group row center">
@@ -102,7 +103,7 @@
         </form>
     </div>
 
-    <div class="card-body text-primary" style="background-color: #196844;">
+    <div class="card-body text-primary" style="background-color: #196844;" *ngIf="usuarioActual.rol === 'Admin'">
         <h5 class="card-title" style="color: white;">Usuarios</h5>
 
         <table class="table table-striped" style="color: white;">
@@ -142,6 +143,7 @@
                 </tr>
             </tbody>
         </table>
+        <button *ngIf="usuarioActual.rol === 'Admin'" (click)="createPdf()" [disabled]="!usuarios.length > 0" class="btn btn-secondary">Descargar Reporte</button>
     </div>
 </div>
-<button (click)="createPdf()">Descargar reporte</button>
+<div></div>

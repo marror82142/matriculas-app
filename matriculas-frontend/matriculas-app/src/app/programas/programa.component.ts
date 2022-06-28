@@ -19,6 +19,7 @@ export class programaComponent implements OnInit {
   public row = '';
   public programa: programa = new programa;
   public programaEditar: programa = null;
+  public usuarioActual=JSON.parse(localStorage.getItem("usuarioActual"));
   tipos:string[]=["Posgrado","Pregrado","Tecnologia", "Tecnica"];
   public title = "Crear programa";
   constructor(private programaService: programaService,
@@ -116,9 +117,6 @@ export class programaComponent implements OnInit {
     this.programaEditar = programaEditar;
   }
 
-<<<<<<< HEAD
-  
-=======
   createPdf(){
     console.log('entro al metodo');
     let arra =  [];
@@ -138,7 +136,7 @@ export class programaComponent implements OnInit {
             arra
           ]
         }
-      }]
+      }]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
     }
     console.log(pdfDefinition);
     const pdf = pdfMake.createPdf(pdfDefinition);
@@ -146,6 +144,5 @@ export class programaComponent implements OnInit {
     pdf.open();
     
   }
->>>>>>> dafb3e71e19e4409af6e9267e8d758be2baab0bc
 
 }

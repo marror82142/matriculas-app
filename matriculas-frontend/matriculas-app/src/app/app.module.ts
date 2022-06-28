@@ -21,7 +21,7 @@ import { LoginComponent } from './usuarios/login.component';
 import { PdfComponent } from './pdf/pdf.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: '', pathMatch:'full'},
+  {path: '', component: LoginComponent, pathMatch:'full'},
   {path: 'login', component: LoginComponent},
   {path: 'usuarios', component: usuarioComponent},
   {path: 'programas', component: programaComponent},

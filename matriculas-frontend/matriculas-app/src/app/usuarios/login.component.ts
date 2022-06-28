@@ -9,6 +9,7 @@ import { Router } from '@angular/router'
 })
 export class LoginComponent implements OnInit {
   public usuario: usuario = new usuario;
+  public usuarioActual=JSON.parse(localStorage.getItem("usuarioActual"));
   public title = "Iniciar Sesion";
   constructor(private usuarioService: usuarioService,
               private router: Router) { }
@@ -23,9 +24,10 @@ public login(): void{
     alert("Los campos son requeridos");
   }else{
       this.usuarioService.login(this.usuario).subscribe(
-        response => { 
+        response => {     
+                      localStorage.setItem('usuarioActual', JSON.stringify(response));
                       if(response.rol == "Estudiante"){
-                        this.router.navigate([''])
+                        this.router.navigate(['/usuarios'])
                       }else{
                         this.router.navigate(['/usuarios'])
                       }

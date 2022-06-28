@@ -15,7 +15,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 })
 
 export class usuarioComponent implements OnInit {
-
+  public usuarioActual=JSON.parse(localStorage.getItem("usuarioActual"));
   usuarios: usuario[];
   public infoContacto: contacto = new contacto();
   public usuario: usuario = new usuario;
@@ -27,6 +27,9 @@ export class usuarioComponent implements OnInit {
               private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(){
+    if(this.usuarioActual){
+      this.usuarioEditar = this.usuarioActual
+    }
     this.usuarioService.getUsuarios().subscribe(
       usuarios => this.usuarios = usuarios
     );

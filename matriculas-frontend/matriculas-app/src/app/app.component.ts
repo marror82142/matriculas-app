@@ -8,4 +8,6 @@
 export class AppComponent {
   title = 'Matriculas App';
   desc = 'Bienvenido Matriculas App';
+  ngOnInit(): void {
+  }
 }

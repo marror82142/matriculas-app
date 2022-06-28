@@ -21,7 +21,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 })
 
 export class matriculaComponent implements OnInit {
-
+  public usuarioActual=JSON.parse(localStorage.getItem("usuarioActual"));
   matriculas: matricula[];
   public matricula: matricula = new matricula;
   public matriculaEditar: matricula = null;
