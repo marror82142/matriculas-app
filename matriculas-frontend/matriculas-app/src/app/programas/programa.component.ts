@@ -4,6 +4,9 @@ import {programaService} from './programa.service';
 import swal from 'sweetalert2';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-usuarios',
@@ -13,6 +16,7 @@ import * as moment from 'moment';
 export class programaComponent implements OnInit {
 
   programas: programa[];
+  public row = '';
   public programa: programa = new programa;
   public programaEditar: programa = null;
   tipos:string[]=["Posgrado","Pregrado","Tecnologia", "Tecnica"];
@@ -24,7 +28,10 @@ export class programaComponent implements OnInit {
   ngOnInit(){
     this.programaService.getProgramas().subscribe(
       programas => this.programas = programas
+      
     );
+
+   
   }
 
   delete(programa: programa): void {
@@ -109,6 +116,36 @@ export class programaComponent implements OnInit {
     this.programaEditar = programaEditar;
   }
 
+<<<<<<< HEAD
   
+=======
+  createPdf(){
+    console.log('entro al metodo');
+    let arra =  [];
+    this.programas.forEach(function (value) {
+      console.log('['+value.codigo+',' +value.nombre+','+ value.tipo+','+ value.tipo+']');
+      arra = [value.codigo, value.nombre, value.tipo,value.tipo];
+    });
+
+    const pdfDefinition: any = {
+      content:[{text: 'Reporte de programas', style: 'subheader'},
+      'La siguiente tabla contiene informacion de los programas',
+      {
+        style: 'tableExample',
+        table: {
+          body: [
+            ['Codigo', 'Nombre', 'Tipo', 'Acciones'],
+            arra
+          ]
+        }
+      }]
+    }
+    console.log(pdfDefinition);
+    const pdf = pdfMake.createPdf(pdfDefinition);
+    console.log(pdf);
+    pdf.open();
+    
+  }
+>>>>>>> dafb3e71e19e4409af6e9267e8d758be2baab0bc
 
 }
