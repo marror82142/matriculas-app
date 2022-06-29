@@ -141,51 +141,48 @@ export class matriculaComponent implements OnInit {
     
   }
 
-  /*exportTable(): void{
-    const downloadLink = document.createElement('a');
-    const dataType = 'matriculas/vnd.ms-excel';
-    const table = document.getElementById('tabla-matricula');
-    const tableHtml = table.outerHTML.replace(/ /g, '%20');
-    const fileName = "matriculas.xlsx";
-    document.body.appendChild(downloadLink);
-    downloadLink.href = 'data' + dataType + ' ' + tableHtml;
-    downloadLink.download = 'matriculas.xlsx';
-    downloadLink.click();
-  }*/
+  exportTable(): void{
+    let d = new Date();
+    let l = d.toLocaleDateString();
+    var a = []
 
-  exportTable(){
-    let a =  [];
+    for (let i = 0; i < this.matriculas.length;i++) {
+      const element = this.matriculas[i];
+      console.log(element);
+    }
     this.matriculas.forEach(function (value) {
+
+      
+
       a = [
-        value.estado, 
-        value.fechaMatricula, 
-        value.id, 
-        value.programa.nombre, 
-        value.usuario.nombre, 
-        value.valor];
+        [
+          value.estado, 
+          String(value.fechaMatricula), 
+          String(value.id), 
+          value.programa.nombre, 
+          value.usuario.nombre, 
+          String(value.valor)],
+      ];
+
     });
 
-    const pdfDefinition: any = {
-      content:[{text: 'Reporte de matriculas', style: 'subheader'},
-      'La siguiente tabla contiene informacion de las matriculas',
-      {
-        style: 'tableExample',
-        table: {
-          body: [
-            ['Estado', 'Fecha matricula', 'id', 'Programa','Usuario','Valor'],
-            a
-          ]
-        }
-      }]
-    }
-    console.log(pdfDefinition);
-    const pdf = pdfMake.createPdf(pdfDefinition);
-    console.log(pdf);
-    pdf.open();
     
+    console.log(a);
+
+    var CsvString = '"sep=,"\r\n';
+    a.forEach(function(RowItem, RowIndex) {
+      RowItem.forEach(function(ColItem, ColIndex) {
+        CsvString += ColItem + ',';
+      });
+      CsvString += "\r\n";
+    });
+    CsvString = "data:application/csv," + encodeURIComponent(CsvString);
+    var x = document.createElement("A");
+    x.setAttribute("href", CsvString );
+    x.setAttribute("download","Matriculas_"+l+".csv");
+    document.body.appendChild(x);
+    x.click();
   }
-
-
 }
 
 
