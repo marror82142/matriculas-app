@@ -22,7 +22,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 export class matriculaComponent implements OnInit {
   public usuarioActual=JSON.parse(localStorage.getItem("usuarioActual"));
-  matriculas: matricula[];
+  matriculas: matricula[] = [];
   public matricula: matricula = new matricula;
   public matriculaEditar: matricula = null;
   estados:string[]=["Activo","Inactivo"];
@@ -57,27 +57,39 @@ export class matriculaComponent implements OnInit {
   }
 
   public create(): void{    
-    if(this.matriculaEditar!= undefined && this.matriculaEditar.usuario!=null){
+    if(this.matriculaEditar && this.matriculaEditar.usuario!=null){
         this.update();
     }else{
-
-        this.matriculas.find(m => {
-          if(m.usuario.cedula == this.selectUser.cedula && m.programa.codigo == this.selectProg.codigo){
-            swal.fire('Error', `Matricula ya existente`, 'error')
-          }else{
-            this.matriculaService.create(this.matricula)
-            .subscribe(matricula => {
+        console.log("1")
+        if(this.matriculas.length > 0){
+          this.matriculas.forEach(m => {
+            console.log("w")
+            if(m.usuario.cedula == this.selectUser.cedula && m.programa.codigo == this.selectProg.codigo){
+              swal.fire('Error', `Matricula ya existente`, 'error')
+            }else{
+              console.log("3")
+              this.matriculaService.create(this.matricula)
+              .subscribe(matricula => {
+                this.matriculaService.getMatriculas().subscribe(
+                  matriculas => this.matriculas = matriculas
+                );
+                this.router.navigate(['/matriculas'])
+                swal.fire('Nueva Matricula', `Matricula creada`, 'success')
+              }
+              );
+            }
+          });
+        }else{
+          this.matriculaService.create(this.matricula)
+          .subscribe(matricula => {                             
             this.matriculaService.getMatriculas().subscribe(
               matriculas => this.matriculas = matriculas
             );
             this.router.navigate(['/matriculas'])
             swal.fire('Nueva Matricula', `Matricula creada`, 'success')
           }
-          );
-          }
-        });
-
-        
+          );    
+        }
     }
   }
 

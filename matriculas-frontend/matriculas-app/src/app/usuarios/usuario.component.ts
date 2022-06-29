@@ -16,7 +16,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 export class usuarioComponent implements OnInit {
   public usuarioActual=JSON.parse(localStorage.getItem("usuarioActual"));
-  usuarios: usuario[];
+  usuarios: usuario[] = [];
   public infoContacto: contacto = new contacto();
   public usuario: usuario = new usuario;
   public usuarioEditar: usuario = null;
@@ -27,7 +27,7 @@ export class usuarioComponent implements OnInit {
               private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(){
-    if(this.usuarioActual){
+    if(this.usuarioActual && this.usuarioActual.rol !== "Admin"){
       this.usuarioEditar = this.usuarioActual
     }
     this.usuarioService.getUsuarios().subscribe(
@@ -84,14 +84,14 @@ export class usuarioComponent implements OnInit {
       }else{
         this.usuario.infoContacto = this.infoContacto
         this.usuarioService.create(this.usuario)
-        .subscribe(usuario => {
+        .subscribe(usuario => {               
           this.usuarioService.getUsuarios().subscribe(
             usuarios => this.usuarios = usuarios
           );
           this.router.navigate(['/usuarios'])
           swal.fire('Nuevo usuario', `usuario ${usuario.nombreUsuario} creado`, 'success')
         }
-        );
+        );   
       }
     }
   }

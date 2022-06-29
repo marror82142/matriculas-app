@@ -20,7 +20,7 @@
                 <div class="col-sm-6 my-2">
                     <select [(ngModel)]="selectProg" [disabled]="false" (change)="selectPrograma($event)"name="programa" class="form-select nuevo" *ngIf="!matriculaEditar">
                         
-                        <option [ngValue]="item" *ngFor="let item of programas">{{item.nombre}}</option>
+                        <option [ngValue]="item" *ngFor="let item of programas">{{item.tipo +" - "+ item.nombre}}</option>
                     </select>
                 </div>
             </div>
@@ -86,7 +86,7 @@
                     <tr *ngFor="let item of matriculas" id="tabla-matricula">
                         <td style="color: white;">{{ item.id }} </td>
                         <td style="color: white;">{{ item.usuario.nombre}} </td>
-                        <td style="color: white;">{{ item.programa.nombre}}</td>
+                        <td style="color: white;">{{ item.programa.tipo + " - " + item.programa.nombre}}</td>
                         <td style="color: white;">{{ item.fechaMatricula }}</td>
                         <td style="color: white;">{{ item.valor }}</td>
                         <td style="color: white;">{{ item.estado }}</td>
@@ -97,7 +97,7 @@
                     </tr>
                 </tbody>
             </table>
-            <button (click)="exportTable()" class="btn btn-secondary"  [disabled]="!matriculas.length > 0" name="button">Descargar Reporte</button>
+            <button (click)="exportTable()" class="btn btn-secondary" name="button">Descargar Reporte</button>
         </div>
     </div>
 </div>

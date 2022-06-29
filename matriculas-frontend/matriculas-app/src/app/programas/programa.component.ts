@@ -15,7 +15,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 export class programaComponent implements OnInit {
 
-  programas: programa[];
+  programas: programa[]  = [];
   public row = '';
   public programa: programa = new programa;
   public programaEditar: programa = null;
@@ -84,18 +84,17 @@ export class programaComponent implements OnInit {
             return
           }
         }
-        )
-
+        );
         this.programaService.create(this.programa)
-        .subscribe(programa => {
+        .subscribe(programa => {                        
           this.programaService.getProgramas().subscribe(
             programas => this.programas = programas
           );
           this.router.navigate(['/programas'])
           swal.fire('Nuevo programa creado', `programa creado`, 'success')
         }
-        );
-    }
+        );  
+    } 
   }
 
   update():void{
