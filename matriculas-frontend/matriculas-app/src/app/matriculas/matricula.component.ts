@@ -144,29 +144,29 @@ export class matriculaComponent implements OnInit {
   exportTable(): void{
     let d = new Date();
     let l = d.toLocaleDateString();
-    var a = []
-
-    for (let i = 0; i < this.matriculas.length;i++) {
-      const element = this.matriculas[i];
-      console.log(element);
-    }
-    this.matriculas.forEach(function (value) {
-
-      
-
-      a = [
-        [
-          value.estado, 
-          String(value.fechaMatricula), 
-          String(value.id), 
-          value.programa.nombre, 
-          value.usuario.nombre, 
-          String(value.valor)],
-      ];
-
-    });
+    var a:any = [];
 
     
+    a.push([
+      "Estado", 
+      "Fecha matricula", 
+      "Id", 
+      "Nombre programa", 
+      "Nombre Estudiante", 
+      "Valor"]); 
+    
+    
+    this.matriculas.forEach(function (value) {
+      a.push([
+        value.estado, 
+        String(value.fechaMatricula), 
+        String(value.id), 
+        value.programa.nombre, 
+        value.usuario.nombre, 
+        String(value.valor)]); 
+    });
+
+    console.log(this.matriculas.length);
     console.log(a);
 
     var CsvString = '"sep=,"\r\n';
