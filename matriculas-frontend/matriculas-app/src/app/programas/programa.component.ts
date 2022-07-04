@@ -147,7 +147,13 @@ export class programaComponent implements OnInit {
   exportTable(): void{
     let d = new Date();
     let l = d.toLocaleDateString();
-    var a = []
+    var a:any = [];
+
+    a.push([
+      "ID", 
+      "Codigo", 
+      "Nombre", 
+      "Tipo"]); 
 
     for (let i = 0; i < this.programas.length;i++) {
       const element = this.programas[i];
@@ -157,13 +163,13 @@ export class programaComponent implements OnInit {
 
       
 
-      a = [
+      a.push( [
         [
           value.id, 
           String(value.codigo), 
           String(value.nombre), 
           value.tipo],
-      ];
+      ]);
 
     });
 

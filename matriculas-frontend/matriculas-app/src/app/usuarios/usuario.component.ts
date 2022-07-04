@@ -145,4 +145,70 @@ export class usuarioComponent implements OnInit {
     
   }
 
+  exportTable(): void{
+    let d = new Date();
+    let l = d.toLocaleDateString();
+    var a:any = [];
+
+    a.push([
+      "Cedula", 
+      "Nombre", 
+      "Nombre Usuario", 
+      "Profesion",
+      "Rol",
+      "Ciudad recidencia",
+      "Correo institucional",
+      "Correo personal",
+      "Direccion",
+      "Telefono",
+      "Contraseña",
+      "Empresa",
+      "Fecha de nacimiento"]); 
+
+    for (let i = 0; i < this.usuarios.length;i++) {
+      const element = this.usuarios[i];
+      console.log(element);
+    }
+    this.usuarios.forEach(function (value) {
+
+      
+
+      a.push( [
+        [
+          String(value.cedula), 
+          String(value.nombre), 
+          String(value.nombreUsuario), 
+          String(value.profesion),
+          String(value.rol),
+          String(value.infoContacto.ciudadResidencia),
+          String(value.infoContacto.correoInstitucional),
+          String(value.infoContacto.correoPersonal),
+          String(value.infoContacto.direccion),
+          String(value.infoContacto.telefono),
+          String(value.contrasena),
+          String(value.empresaTrabajo),
+          String(value.fechaNacimiento)
+        ],
+      ]);
+
+    });
+
+    
+    console.log(a);
+
+    var CsvString = '"sep=,"\r\n';
+    a.forEach(function(RowItem, RowIndex) {
+      RowItem.forEach(function(ColItem, ColIndex) {
+        CsvString += ColItem + ',';
+      });
+      CsvString += "\r\n";
+    });
+    CsvString = "data:application/csv," + encodeURIComponent(CsvString);
+    var x = document.createElement("A");
+    x.setAttribute("href", CsvString );
+    x.setAttribute("download","Usuarios_"+l+".csv");
+    document.body.appendChild(x);
+    x.click();
+  }
+
 }
