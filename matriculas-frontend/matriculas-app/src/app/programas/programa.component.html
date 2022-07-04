@@ -63,7 +63,7 @@
                     </tr>
                 </tbody>
             </table>
-            <button *ngIf="usuarioActual.rol === 'Admin'" (click)="createPdf()" [disabled]="!programas.length > 0" class="btn btn-secondary">Descargar Reporte</button>
+            <button *ngIf="usuarioActual.rol === 'Admin'" (click)="exportTable()" [disabled]="!programas.length > 0" class="btn btn-secondary">Descargar Reporte</button>
         </div>
     </div>
 </div>

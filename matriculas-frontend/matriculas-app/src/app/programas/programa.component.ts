@@ -144,4 +144,45 @@ export class programaComponent implements OnInit {
     
   }
 
+  exportTable(): void{
+    let d = new Date();
+    let l = d.toLocaleDateString();
+    var a = []
+
+    for (let i = 0; i < this.programas.length;i++) {
+      const element = this.programas[i];
+      console.log(element);
+    }
+    this.programas.forEach(function (value) {
+
+      
+
+      a = [
+        [
+          value.id, 
+          String(value.codigo), 
+          String(value.nombre), 
+          value.tipo],
+      ];
+
+    });
+
+    
+    console.log(a);
+
+    var CsvString = '"sep=,"\r\n';
+    a.forEach(function(RowItem, RowIndex) {
+      RowItem.forEach(function(ColItem, ColIndex) {
+        CsvString += ColItem + ',';
+      });
+      CsvString += "\r\n";
+    });
+    CsvString = "data:application/csv," + encodeURIComponent(CsvString);
+    var x = document.createElement("A");
+    x.setAttribute("href", CsvString );
+    x.setAttribute("download","Programas_"+l+".csv");
+    document.body.appendChild(x);
+    x.click();
+  }
+
 }
