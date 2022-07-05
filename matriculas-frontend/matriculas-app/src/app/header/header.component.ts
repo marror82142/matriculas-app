@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 import { Router } from '@angular/router';
-import { usuario } from '../usuarios/usuario';
 
 @Component({
   selector: 'app-header',
@@ -14,7 +13,7 @@ public usuarioActual=JSON.parse(localStorage.getItem("usuarioActual"));
   public cerrarSesion(): void{
     if(this.usuarioActual){
       localStorage.clear()
-      localStorage.setItem('usuarioActual', JSON.stringify(null));
+      localStorage.setItem('usuarioActual', JSON.stringify(null))
       this.router.navigate([''])
     }
   }

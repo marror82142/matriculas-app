@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #196844;">
     <div class="container-fluid">
-        <img src="../logo-poli.png"/>
+        <img src="assets/logo-poli.png"/>
         <a class="navbar-brand" href="#">{{title}}</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -14,16 +14,16 @@
                     <a class="nav-link" routerLink="/login"  *ngIf="!usuarioActual">Iniciar Sesion</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="/programas"  *ngIf="usuarioActual.rol === 'Admin'">Programas</a>
+                    <a class="nav-link" routerLink="/programas"  *ngIf="usuarioActual?.rol === 'Admin'">Programas</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="/usuarios"  *ngIf="usuarioActual.rol === 'Admin'">Usuarios</a>
+                    <a class="nav-link" routerLink="/usuarios"  *ngIf="usuarioActual?.rol === 'Admin'">Usuarios</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="/matriculas"  *ngIf="usuarioActual.rol === 'Admin'">Matriculas</a>
+                    <a class="nav-link" routerLink="/matriculas"  *ngIf="usuarioActual?.rol === 'Admin'">Matriculas</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="/usuarios"  *ngIf="usuarioActual.rol === 'Estudiante'">Mi Informacion</a>
+                    <a class="nav-link" routerLink="/usuarios"  *ngIf="usuarioActual?.rol === 'Estudiante'">Mi Informacion</a>
                 </li>
                 <li class="nav-item">
                     <button  *ngIf="usuarioActual" (click)="cerrarSesion()" class="btn btn-primary"  name="button">Cerrar Sesion</button>
